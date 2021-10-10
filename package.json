@@ -10,8 +10,13 @@
     "start": "nuxt start"
   },
   "dependencies": {
+    "@nuxtjs/composition-api": "^0.29.2",
     "core-js": "^3.15.0",
     "nuxt": "^2.15.7"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@nuxt/types": "^2.15.8",
+    "@nuxt/typescript-build": "^2.1.0",
+    "@nuxtjs/eslint-config-typescript": "^6.0.1"
+  }
 }

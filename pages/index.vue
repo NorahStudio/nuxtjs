@@ -1,3 +1,5 @@
 <template>
-  <Tutorial/>
+  <div>
+    <a href="./tutorial">Tutorial</a>
+  </div>
 </template>
