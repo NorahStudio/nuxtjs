@@ -8,6 +8,8 @@
       <WizardStep name="Pricing">
         <h1>How much we do it for</h1>
         <input name="test" type="text" value="Step 2" />
+        <input type="file" @change="handleFileUpload"/>
+        <div>{{ uploadStatus }}</div>
       </WizardStep>
       <WizardStep name="About Us">
         <h1>Why we do it</h1>
@@ -24,6 +26,7 @@
 <script>
 
 import { defineComponent } from '@vue/composition-api'
+import Papa from 'papaparse'
 
 export default defineComponent({
   methods: {
@@ -33,6 +36,23 @@ export default defineComponent({
     handleComplete() {
       alert('Done!');
     },
+    handleFileUpload(event) {
+      if (event.target.files == null || event.target.files[0] == null) {
+        return;
+      }
+      const reader = new FileReader();
+      const handleFileLoad = (e) => {
+        reader.removeEventListener('load', handleFileLoad);
+        const parsedData = Papa.parse(e.target.result);
+        console.log(parsedData);
+        this.uploadStatus = `${parsedData.data.length} rows have been uploaded`;
+      };
+      reader.addEventListener('load', handleFileLoad);
+      reader.readAsText(event.target.files[0], 'UTF-8');
+    },
+  },
+  data() {
+    return { uploadStatus: 'Please upload a CSV file:' };
   },
 });
 </script>
