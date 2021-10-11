@@ -1,23 +1,41 @@
 <template>
   <div class="upload-wizard-main">
     <Wizard @nextStep="handleNextStep" @complete="handleComplete">
-      <WizardStep name="Services" :selected="true">
-        <h1>What we do</h1>
-        <input name="test" type="text" value="Step 1" />
+      <WizardStep name="Step 1" :selected="true">
+        <h1>In Step 1</h1>
+        <label for="step1_demo">Test Textbox1</label>
+        <input id="step1_demo" name="test" type="text" value="Step 1" />
+        <br>
+        <br>
+        <input type="radio" id="html" name="fav_language" value="HTML">
+        <label for="html">HTML</label><br>
+        <input type="radio" id="css" name="fav_language" value="CSS">
+        <label for="css">CSS</label><br>
+        <input type="radio" id="javascript" name="fav_language" value="JavaScript">
+        <label for="javascript">JavaScript</label><br><br>
       </WizardStep>
-      <WizardStep name="Pricing">
-        <h1>How much we do it for</h1>
-        <input name="test" type="text" value="Step 2" />
+      <WizardStep name="Step 2 / Upload">
+        <h1>In Step 2</h1>
+        <label for="step2_demo">Test Textbox2</label>
+        <input id="step2_demo" name="test" type="text" value="Step 2" />
+        <br>
+        <br>
         <input type="file" @change="handleFileUpload"/>
-        <div>{{ uploadStatus }}</div>
+        <p>{{ uploadStatus }}</p>
       </WizardStep>
-      <WizardStep name="About Us">
-        <h1>Why we do it</h1>
-        <input name="test" type="text" value="Step 3" />
+      <WizardStep name="Step 3">
+        <h1>In Step 3</h1>
+        <label for="step3_demo">Test Textbox3</label>
+        <input id="step3_demo" name="test" type="text" value="Step 3" />
+        <br>
+        <br>
       </WizardStep>
       <WizardStep name="Submit">
-        <h1>Show the results</h1>
-        <input name="test" type="text" value="Step 4" />
+        <h1>Last Step~~</h1>
+        <label for="step4_demo">Test Textbox4</label>
+        <input id="step4_demo" name="test" type="text" value="Step 4" />
+        <br>
+        <br>
       </WizardStep>
     </Wizard>
   </div>
@@ -44,8 +62,8 @@ export default defineComponent({
       const handleFileLoad = (e) => {
         reader.removeEventListener('load', handleFileLoad);
         const parsedData = Papa.parse(e.target.result);
-        console.log(parsedData);
-        this.uploadStatus = `${parsedData.data.length} rows have been uploaded`;
+        console.log(parsedData.data);
+        this.uploadStatus = `${parsedData.data.length} rows have been uploaded. The parsed result is shown in console.`;
       };
       reader.addEventListener('load', handleFileLoad);
       reader.readAsText(event.target.files[0], 'UTF-8');
@@ -62,6 +80,12 @@ export default defineComponent({
   margin: 0;
   padding: 0;
   border: 0 solid black;
+}
+
+button, input {
+  padding: 5px 10px 5px 10px;
+  border-radius: 3px;
+  border: 1px solid black;
 }
 
 .upload-wizard-main {

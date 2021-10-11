@@ -16,7 +16,7 @@
     <div class="steps-details">
       <slot></slot>
     </div>
-    <div>
+    <div class="footer">
       <button @click="goToNext()">{{ isLast ? 'Finish' : 'Next' }}</button>
     </div>
   </div>
@@ -84,5 +84,11 @@ export default defineComponent({
 
 .steps > ul > li.is-active {
   background-color: rgb(140, 140, 140);
+}
+
+.footer {
+  display: flex;
+  flex-direction: row-reverse;
+  padding-top: 20px;
 }
 </style>
